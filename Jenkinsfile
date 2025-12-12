@@ -43,7 +43,7 @@ pipeline {
                     if (isUnix()) {
                         sh 'java -jar target/*.jar'
                     } else {
-                        bat 'java -jar target\\my-app-1.0-SNAPSHOT.jar'
+                        bat 'java -cp target\\my-app-1.0-SNAPSHOT.jar com.example.App'
                     }
                 }
             }
