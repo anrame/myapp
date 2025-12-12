@@ -1,11 +1,9 @@
 pipeline {
     agent any
-
     tools {
         // This name must match exactly what you set in 'Global Tool Configuration'
         maven 'MyMaven' 
     }
-
     stages {
         stage('Checkout') {
             steps {
@@ -14,7 +12,6 @@ pipeline {
                 checkout scm
             }
         }
-
         stage('Build') {
             steps {
                 script {
@@ -26,7 +23,6 @@ pipeline {
                 }
             }
         }
-
         stage('Test') {
             steps {
                 echo 'Running Unit Tests...'
@@ -39,6 +35,29 @@ pipeline {
                     }
                 }
             }
+        }
+        stage('Run JAR') {
+            steps {
+                echo 'Running the JAR file...'
+                script {
+                    if (isUnix()) {
+                        sh 'java -jar target/*.jar'
+                    } else {
+                        bat 'java -jar target/*.jar'
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline execution completed.'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
