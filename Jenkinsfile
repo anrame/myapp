@@ -43,7 +43,7 @@ pipeline {
                     if (isUnix()) {
                         sh 'java -jar target/*.jar'
                     } else {
-                        bat 'java -jar target/*.jar'
+                        bat 'java -jar target\\*.jar'
                     }
                 }
             }
