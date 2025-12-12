@@ -41,7 +41,7 @@ pipeline {
                 echo 'Running the JAR file...'
                 script {
                     if (isUnix()) {
-                        sh 'java -jar target/*.jar'
+                        sh 'java -cp target/my-app-1.0-SNAPSHOT.jar com.example.App'
                     } else {
                         bat 'java -cp target\\my-app-1.0-SNAPSHOT.jar com.example.App'
                     }
